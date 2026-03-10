@@ -82,11 +82,12 @@
 # 📋 预设模板一览（选一个就行）
 # ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
 #
-#   1️⃣ always_on        全天候，有新增就推（默认）
-#   2️⃣ morning_evening  全天推送 + 晚间汇总（推荐大多数人）
-#   3️⃣ office_hours     工作日三段式：到岗速览→午间热点→收工汇总
-#   4️⃣ night_owl        午后速览 + 深夜全天汇总
-#   5️⃣ custom           完全自定义（需要编辑本文件底部的 custom 段）
+#   1️⃣ always_on             全天候，有新增就推（默认）
+#   2️⃣ morning_evening       全天推送 + 晚间汇总（推荐大多数人）
+#   3️⃣ morning_noon_evening  早中晚各推一次，仅推新增（内容不重复）
+#   4️⃣ office_hours          工作日三段式：到岗速览→午间热点→收工汇总
+#   5️⃣ night_owl             午后速览 + 深夜全天汇总
+#   6️⃣ custom                完全自定义（需要编辑本文件底部的 custom 段）
 #
 # 想自定义？两种方式：
 #   1. 直接翻到本文件底部的「自定义模式」部分
@@ -344,9 +345,76 @@ presets:
       7: "all_day"
 
 
+  # ───────────────────────────────────────────────────────────
+  # 5️⃣ morning_noon_evening - 早中晚各推送一次（内容不重复）
+  #
+  # 每天仅在早、中、晚三个时段各推送一次，使用增量模式避免重复。
+  # 适合：希望减少打扰、只收三档汇总的用户
+  #
+  # 默认（静默期）：推送 ✗ | AI分析 ✗
+  # 早间 / 午间 / 晚间：推送 ✓ | 增量内容 | 每时段最多推一次
+  # ───────────────────────────────────────────────────────────
+  morning_noon_evening:
+    name: "早中晚三次"
+    description: "早、中、晚各推送一次，仅推送新增内容，避免重复。"
+
+    default:
+      collect: true
+      analyze: false
+      ai_mode: "current"
+      push: false                  # 非推送时段不推送
+      report_mode: "incremental"
+      once:
+        analyze: true
+        push: true
+
+    periods:
+      morning_push:
+        name: "早间推送"
+        start: "07:00"
+        end: "09:00"
+        analyze: true
+        ai_mode: "current"
+        push: true
+        report_mode: "incremental" # 只推新增，不重复
+        # once 继承 default → 窗口内只推/分析一次
+
+      noon_push:
+        name: "午间推送"
+        start: "11:00"
+        end: "13:00"
+        analyze: true
+        ai_mode: "current"
+        push: true
+        report_mode: "incremental"
+        # once 继承 default → 窗口内只推/分析一次
+
+      evening_push:
+        name: "晚间推送"
+        start: "19:00"
+        end: "21:00"
+        analyze: true
+        ai_mode: "daily"           # 晚间做当日汇总分析
+        push: true
+        report_mode: "incremental" # 推送内容仍为增量，汇总仅给 AI
+        # once 继承 default → 窗口内只推/分析一次
+
+    day_plans:
+      all_day:
+        periods: ["morning_push", "noon_push", "evening_push"]
+    week_map:
+      1: "all_day"
+      2: "all_day"
+      3: "all_day"
+      4: "all_day"
+      5: "all_day"
+      6: "all_day"
+      7: "all_day"
+
+
 # ═══════════════════════════════════════════════════════════════
 #
-# 5️⃣ 自定义模式
+# 6️⃣ 自定义模式
 #
 # 当 config.yaml 中设置 schedule.preset: "custom" 时，
 # 系统会读取下面这段配置。
