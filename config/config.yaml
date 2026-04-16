@@ -77,6 +77,18 @@ platforms:
       name: "抖音"
     - id: "zhihu"
       name: "知乎"
+    - id: "xueqiu"
+      name: "雪球"
+    - id: "github"
+      name: "GitHub Today"
+    - id: "zaobao"
+      name: "联合早报"
+    - id: "jin10"
+      name: "金十数据"
+    - id: "ithome"
+      name: "IT之家"
+    - id: "juejin"
+      name: "掘金"
 
 
 
@@ -126,6 +138,10 @@ rss:
     - id: "yahoo-finance"
       name: "雅虎财经"
       url: "https://finance.yahoo.com/news/rssindex"
+
+    - id: "36kr"
+      name: "36氪"
+      url: "https://36kr.com/feed"
 
     # 自定义源示例
     # - id: "custom-feed"
