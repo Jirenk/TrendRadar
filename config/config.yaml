@@ -79,8 +79,6 @@ platforms:
       name: "知乎"
     - id: "xueqiu"
       name: "雪球"
-    - id: "github"
-      name: "GitHub Today"
     - id: "zaobao"
       name: "联合早报"
     - id: "jin10"
@@ -296,7 +294,7 @@ display:
   standalone:
     platforms: ["zhihu", "wallstreetcn-hot"]     # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
     rss_feeds: []                     # RSS 源 ID 列表（如 ["hacker-news"]）
-    max_items: 20                     # 每个源最多展示条数（0=不限制）
+    max_items: 10                     # 每个源最多展示条数（0=不限制）
 
 
 # ===============================================================
