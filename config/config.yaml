@@ -41,7 +41,7 @@ app:
 # ===============================================================
 schedule:
   enabled: true                         # 是否启用调度系统
-  preset: "morning_evening"             # 预设模板名称（见上方说明）
+  preset: "night_owl"             # 预设模板名称（见上方说明）
 
 
 # ===============================================================
@@ -71,18 +71,12 @@ platforms:
       name: "凤凰网"
     - id: "tieba"
       name: "贴吧"
-    - id: "weibo"
-      name: "微博"
     - id: "douyin"
       name: "抖音"
     - id: "zhihu"
       name: "知乎"
     - id: "xueqiu"
       name: "雪球"
-    - id: "zaobao"
-      name: "联合早报"
-    - id: "jin10"
-      name: "金十数据"
     - id: "ithome"
       name: "IT之家"
     - id: "juejin"
